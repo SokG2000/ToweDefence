@@ -1,30 +1,65 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class MovementAgent : MonoBehaviour
 {
     [SerializeField]
-    private float m_Speed;
+    private Vector3 _StartPosition; 
     [SerializeField]
-    private Vector3 m_Target;
-
+    private Vector3 _StartSpeed;
+    private Vector3 _Speed;
+    public Vector3 TargetPosition;
+    [SerializeField]
+    private float G;
+    [SerializeField]
+    private float _Mass;
+    [SerializeField]
+    private float _TargetMass;
     private const float TOLERANCE = 0.1f;
+    
+    private Camera cam;
+
+    
     void Start()
     {
-        m_Speed = 5f;
-        m_Target = new Vector3(10, 0, 10);
+        transform.position = _StartPosition;
+        cam = GameObject.Find("Main Camera").GetComponent("Camera") as Camera;
+        _Speed = _StartSpeed;
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        float distance = (m_Target - transform.position).magnitude;
+        float distance = (TargetPosition - transform.position).magnitude;
         if (distance < TOLERANCE)
         {
             return;
         }
-        Vector3 dir = m_Target - transform.position;
-        Vector3 delta = dir * (m_Speed * Time.deltaTime);
-        transform.Translate(delta);
+        
+        Vector3 viewPos = cam.WorldToViewportPoint(transform.position);
+        var x = viewPos.x;
+        if ((x < 0 && _Speed.x < 0) || (x > 1 && _Speed.x > 0))
+        {
+            _Speed.x = -_Speed.x;
+        }
+        var y = viewPos.y;
+        if ((y < 0 && _Speed.y < 0) || (y > 1 && _Speed.y > 0))
+        {
+            _Speed.y = -_Speed.y;
+        }
+        var z = viewPos.z;
+        if (z < 0 && _Speed.z < 0)
+        {
+            _Speed.z = -_Speed.z;
+        }
+
+        Vector3 a = (TargetPosition - transform.position).normalized * (G * _TargetMass /
+                                                                        (distance * distance));
+        transform.position = transform.position + _Speed * Time.fixedDeltaTime +
+                             a * (Time.fixedDeltaTime * Time.fixedDeltaTime);
+        _Speed = _Speed + a * Time.fixedDeltaTime;
+        
     }
 }
