@@ -16,7 +16,8 @@ public class MovementAgent : MonoBehaviour
     private float G;
     [SerializeField]
     private float _TargetMass;
-    private const float TOLERANCE = 0.1f;
+    //private const float TOLERANCE = 0.1f;
+    private const float MAX_ACCELERATION = 1000f;
     [SerializeField]
     private GameObject _Target;
     
@@ -34,12 +35,12 @@ public class MovementAgent : MonoBehaviour
     void FixedUpdate()
     {
         float distance = (TargetPosition - transform.position).magnitude;
-        if (distance < TOLERANCE)
+        Vector3 a = (TargetPosition - transform.position).normalized * (G * _TargetMass /
+                                                                        (distance * distance));
+        if (a.magnitude > MAX_ACCELERATION)
         {
             return;
         }
-        Vector3 a = (TargetPosition - transform.position).normalized * (G * _TargetMass /
-                                                                        (distance * distance));
         transform.position = transform.position + _Speed * Time.fixedDeltaTime +
                              a * (Time.fixedDeltaTime * Time.fixedDeltaTime / 2);
         _Speed = _Speed + a * Time.fixedDeltaTime;
