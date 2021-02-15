@@ -39,7 +39,7 @@ public class MovementAgent : MonoBehaviour
                                                                         (distance * distance));
         if (a.magnitude > MAX_ACCELERATION)
         {
-            return;
+            a = a.normalized * MAX_ACCELERATION;
         }
         transform.position = transform.position + _Speed * Time.fixedDeltaTime +
                              a * (Time.fixedDeltaTime * Time.fixedDeltaTime / 2);

@@ -504,7 +504,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _StartPosition: {x: 0, y: 0, z: 0}
-  _StartSpeed: {x: 0, y: 2, z: 0}
+  _StartSpeed: {x: 0, y: 0.2, z: 0}
   TargetPosition: {x: 3, y: 0, z: 0}
   G: 10
   _TargetMass: 1
