@@ -9,6 +9,8 @@ namespace Field
         private int m_GridWidth;
         [SerializeField]
         private int m_GridHeight;
+        [SerializeField] private Vector2Int m_Target;
+        [SerializeField] private Vector2Int m_StartCoordinate;
 
         [SerializeField]
         private float m_NodeSize;
@@ -21,7 +23,6 @@ namespace Field
 
         private void Awake()
         {
-            m_Grid = new Grid(m_GridWidth, m_GridHeight);
             m_Camera = Camera.main;
             
             // Default plane size is 10 by 10
@@ -29,6 +30,7 @@ namespace Field
             float height = m_GridHeight * m_NodeSize;
             transform.localScale = new Vector3(width * 0.1f, 1f, height * 0.1f);
             m_Offset = transform.position - new Vector3(width * 0.5f, 0, height * 0.5f);
+            m_Grid = new Grid(m_GridWidth, m_GridHeight, m_Offset, m_NodeSize, m_Target);
         }
 
         private void Update()
@@ -63,6 +65,32 @@ namespace Field
         {
             Gizmos.color = Color.red;
             Gizmos.DrawSphere(m_Offset, 0.3f);
+            if (m_Grid == null) return;
+            
+            foreach (Node node in m_Grid.EnumerateAllNodes())
+            {
+                if (node.NextNode == null)
+                {
+                    continue;
+                }
+
+                if (node.isOccupied)
+                {
+                    Gizmos.DrawSphere(node.m_Position, 0.5f);
+                    continue;
+                }
+
+                Vector3 start = node.m_Position;
+                Vector3 end = node.NextNode.m_Position;
+
+                Vector3 dir = end - start;
+                start -= dir * 0.25f;
+                end -= dir * 0.75f;
+                
+                Gizmos.DrawLine(start, end);
+                Gizmos.DrawSphere(end, 0.1f);
+            }
+            
         }
     }
 }

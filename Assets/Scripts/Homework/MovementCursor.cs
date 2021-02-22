@@ -43,7 +43,7 @@ public class MovementCursor : MonoBehaviour
         private void PlaceCamera()
         {
             int node_num = Math.Max(m_GridWidth, m_GridHeight);
-            float y = node_num * m_NodeSize * 2f;
+            float y = node_num * m_NodeSize;
             m_Camera.transform.position = new Vector3(0, y, 0);
             m_Camera.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
         }
@@ -94,7 +94,6 @@ public class MovementCursor : MonoBehaviour
             if (is_hitted)
             {
                 m_Cursor.SetActive(true);
-                m_Cursor.transform.position = hit.point;
             }
             else
             {
@@ -119,12 +118,15 @@ public class MovementCursor : MonoBehaviour
                 //Debug.Log("hit");
                 //Debug.Log(x.ToString() + " " + y.ToString());
 
+                Vector3 cellCenter = GetCellCenter(coordinateOnGrid);
+                m_Cursor.transform.position = cellCenter;
+
                 if (Input.GetMouseButtonDown(0))
                 {
                     Debug.Log("Pressed primary button.");
-                    Vector3 newTarget = GetCellCenter(coordinateOnGrid);
-                    Debug.Log("New target is " + newTarget.ToString());
-                    m_MovementAgent.SetTarget(newTarget);
+                    //Vector3 newTarget = GetCellCenter(coordinateOnGrid);
+                    Debug.Log("New target is " + cellCenter.ToString());
+                    m_MovementAgent.SetTarget(cellCenter);
                 }
             }
         }
@@ -143,7 +145,7 @@ public class MovementCursor : MonoBehaviour
                     new Vector3(min_x + i * m_NodeSize, 0, max_z));
             }
 
-            for (int j = 0; j < m_GridHeight; ++j)
+            for (int j = 0; j <= m_GridHeight; ++j)
             {
                 Gizmos.DrawLine(new Vector3(min_x, 0, min_z + j * m_NodeSize),
                     new Vector3(max_x, 0, min_z + j * m_NodeSize));
