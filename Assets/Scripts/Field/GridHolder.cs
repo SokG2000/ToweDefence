@@ -16,11 +16,23 @@ namespace Field
         private float m_NodeSize;
 
         private Grid m_Grid;
+        
+        public Vector2Int StartCoordinate => m_StartCoordinate;
+
+        public Grid Grid => m_Grid;
+
 
         private Camera m_Camera;
 
         private Vector3 m_Offset;
 
+        private void PlaceCamera()
+        {
+            int node_num = Math.Max(m_GridWidth, m_GridHeight);
+            float y = node_num * m_NodeSize;
+            m_Camera.transform.position = new Vector3(0, y, 0);
+            m_Camera.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
+        }
         private void Awake()
         {
             m_Camera = Camera.main;
@@ -31,6 +43,7 @@ namespace Field
             transform.localScale = new Vector3(width * 0.1f, 1f, height * 0.1f);
             m_Offset = transform.position - new Vector3(width * 0.5f, 0, height * 0.5f);
             m_Grid = new Grid(m_GridWidth, m_GridHeight, m_Offset, m_NodeSize, m_Target);
+            PlaceCamera();
         }
 
         private void Update()
@@ -42,23 +55,48 @@ namespace Field
 
             Vector3 mousePosition = Input.mousePosition;
             Ray ray = m_Camera.ScreenPointToRay(mousePosition);
+            
+            bool is_hitted = (Physics.Raycast(ray, out RaycastHit hit) && hit.collider.transform == transform);
+            if (!is_hitted) return;
+            
+            Vector3 hitPosition = hit.point;
+            Vector2Int coordinateOnGrid = GetCell(hitPosition);
 
-            if (Physics.Raycast(ray, out RaycastHit hit))
+            
+            Debug.Log("hit");
+
+            if (Input.GetMouseButtonDown(0))
             {
-                if (hit.transform != transform)
+                Node node = m_Grid.GetNode(coordinateOnGrid);
+                if (node.isOccupied)
                 {
-                    return;
+                    node.isOccupied = false;
+                    m_Grid.UpdatePathfinding();
+                    m_Grid.UpdateOccupationAvailability();
                 }
-
-                Vector3 hitPosition = hit.point;
-                Vector3 difference = hitPosition - m_Offset;
-
-                int x = (int) (difference.x / m_NodeSize);
-                int y = (int) (difference.z / m_NodeSize);
-                
-                Debug.Log("hit");
-                Debug.Log(x.ToString() + " " + y.ToString());
+                else
+                {
+                    m_Grid.TryOccupyNode(coordinateOnGrid);
+                }
+                //node.isOccupied = !node.isOccupied;
+                //m_Grid.UpdatePathfinding();
             }
+        }
+        
+        private Vector3 GetCellCenter(Vector2Int coordinateOnGrid)
+        {
+            float xShift = (coordinateOnGrid.x + 0.5f) * m_NodeSize;
+            float zShift = (coordinateOnGrid.y + 0.5f) * m_NodeSize;
+            Vector3 shift = new Vector3(xShift, 0f, zShift);
+            return m_Offset + shift;
+        }
+
+        private Vector2Int GetCell(Vector3 coordinateOnPlane)
+        {
+            Vector3 difference = coordinateOnPlane - m_Offset;
+            int x = (int) (difference.x / m_NodeSize);
+            int y = (int) (difference.z / m_NodeSize);
+            return new Vector2Int(x, y);
         }
 
         private void OnDrawGizmos()
@@ -76,12 +114,14 @@ namespace Field
 
                 if (node.isOccupied)
                 {
-                    Gizmos.DrawSphere(node.m_Position, 0.5f);
+                    Gizmos.color = Color.black;
+                    Gizmos.DrawSphere(node.Position, 0.5f);
+                    Gizmos.color = Color.red;
                     continue;
                 }
 
-                Vector3 start = node.m_Position;
-                Vector3 end = node.NextNode.m_Position;
+                Vector3 start = node.Position;
+                Vector3 end = node.NextNode.Position;
 
                 Vector3 dir = end - start;
                 start -= dir * 0.25f;
@@ -90,7 +130,6 @@ namespace Field
                 Gizmos.DrawLine(start, end);
                 Gizmos.DrawSphere(end, 0.1f);
             }
-            
         }
     }
 }

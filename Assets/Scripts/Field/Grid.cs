@@ -32,11 +32,40 @@ namespace Field
 
             m_Pathfinding = new FlowFieldPathfinding(this, target);
             m_Pathfinding.UpdateField();
+            UpdateOccupationAvailability();
         }
 
         public Node GetNode(Vector2Int coordinate)
         {
             return GetNode(coordinate.x, coordinate.y);
+        }
+
+        public bool CanOccupyNode(Vector2Int coordinate)
+        {
+            if (coordinate.x < 0 || coordinate.x >= m_Width)
+            {
+                return false;
+            }
+
+            if (coordinate.y < 0 || coordinate.y >= m_Height)
+            {
+                return false;
+            }
+            // TODO If some enemy is going on this cell return false
+            return m_Nodes[coordinate.x, coordinate.y].OccupationAvailability;
+        }
+
+        public bool TryOccupyNode(Vector2Int coordinate)
+        {
+            if (!CanOccupyNode(coordinate))
+            {
+                return false;
+            }
+            m_Nodes[coordinate.x, coordinate.y].isOccupied = true;
+            UpdatePathfinding();
+            UpdateOccupationAvailability();
+            // TODO Enemies that are not in this node but are going to this node change target
+            return true;
         }
 
         public Node GetNode(int i, int j)
@@ -63,6 +92,15 @@ namespace Field
                 }
             }
         }
-        
+
+        public void UpdatePathfinding()
+        {
+            m_Pathfinding.UpdateField();
+        }
+
+        public void UpdateOccupationAvailability()
+        {
+            // TODO write this method
+        }
     }
 }

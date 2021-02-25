@@ -4,7 +4,8 @@ namespace Field
 {
     public class Node
     {
-        public Vector3 m_Position;
+        public Vector3 Position;
+        public bool OccupationAvailability;
         
         public Node NextNode;
         public bool isOccupied;
@@ -13,7 +14,9 @@ namespace Field
 
         public Node(Vector3 position)
         {
-            m_Position = position;
+            Position = position;
+            OccupationAvailability = true;    // Now always true.
+                                                // TODO - calculate after updating field
         }
         public void ResetWeight()
         {

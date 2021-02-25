@@ -76,7 +76,6 @@ public class MovementCursor : MonoBehaviour
             int x = (int) (difference.x / m_NodeSize);
             int y = (int) (difference.z / m_NodeSize);
             return new Vector2Int(x, y);
-
         }
 
         private void Update()
