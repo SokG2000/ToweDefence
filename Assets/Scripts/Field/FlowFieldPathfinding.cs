@@ -62,7 +62,6 @@ namespace Field
             {
                 Connection current = unstablePositions.Min;
                 unstablePositions.Remove(current);
-                //Vector2Int currentPosition = current.position;
                 Node currentNode = m_Grid.GetNode(current.position);
                 foreach (Connection neigbour in GetNeighbours(current.position))
                 {
@@ -77,31 +76,6 @@ namespace Field
                     }
                 }
             }
-
-            /*Queue<Vector2Int> queue = new Queue<Vector2Int>();
-            
-            queue.Enqueue(Target);
-
-            while (queue.Count > 0)
-            {
-                Vector2Int current = queue.Dequeue();
-                Node currentNode = m_Grid.GetNode(current);
-                float weightToTarget = currentNode.PathWeight + 1f;
-
-                foreach (Vector2Int neighbour in GetNeighbours(current))
-                {
-                    Node neighbourNode = m_Grid.GetNode(neighbour);
-                    if (weightToTarget < neighbourNode.PathWeight)
-                    {
-                        neighbourNode.NextNode = currentNode;
-                        neighbourNode.PathWeight = weightToTarget;
-                        queue.Enqueue(neighbour);
-                    }
-                }
-            }
-            */
-
-
         }
 
         private IEnumerable<Connection> GetNeighbours(Vector2Int coordinate)

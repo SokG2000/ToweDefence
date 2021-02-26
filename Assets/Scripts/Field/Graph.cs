@@ -30,8 +30,6 @@ namespace Field
             m_Width = mGrid.Width;
             m_Height = mGrid.Height;
             m_VertexIndex = new int[m_Width, m_Height];
-            //m_VertexCoordinates = new List<Vector2Int>();
-            //m_Graph = new List<List<Connection>>();
             ReadCurrentPosition();
         }
 

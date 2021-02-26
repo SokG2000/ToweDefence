@@ -78,8 +78,6 @@ namespace Field
                 {
                     m_Grid.TryOccupyNode(coordinateOnGrid);
                 }
-                //node.isOccupied = !node.isOccupied;
-                //m_Grid.UpdatePathfinding();
             }
         }
         

@@ -7,18 +7,6 @@ namespace Field
 {
     public partial class VertexDiconnectivityComponents
     {
-        /*private struct Node
-        {
-            public Vector2Int position;
-            public int index;
-
-            public Node(Vector2Int position, int index)
-            {
-                this.position = position;
-                this.index = index;
-            }
-        }*/
-
         private Grid m_Grid;
         private Vector2Int m_Target;
         private Vector2Int m_Start;
@@ -149,7 +137,8 @@ namespace Field
         } 
 
         /// <summary>
-        /// Выставляет корректные значения OccupationAvailability для текущего положения поля
+        /// Выставляет корректные значения OccupationAvailability для текущего положения поля.
+        /// Для уже занятых клеток OccupationAvailability = true.
         /// </summary>
         public void SetOccupationAvailability()
         {
