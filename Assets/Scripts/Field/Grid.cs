@@ -15,8 +15,9 @@ namespace Field
         public int Height => m_Height;
 
         private FlowFieldPathfinding m_Pathfinding;
+        private VertexDiconnectivityComponents m_AvailabilityChecking;
 
-        public Grid(int width, int height, Vector3 offset, float nodeSize, Vector2Int target)
+        public Grid(int width, int height, Vector3 offset, float nodeSize, Vector2Int target, Vector2Int start)
         {
             m_Height = height;
             m_Width = width;
@@ -32,6 +33,7 @@ namespace Field
 
             m_Pathfinding = new FlowFieldPathfinding(this, target);
             m_Pathfinding.UpdateField();
+            m_AvailabilityChecking = new VertexDiconnectivityComponents(this, target, start);
             UpdateOccupationAvailability();
         }
 
@@ -101,6 +103,18 @@ namespace Field
         public void UpdateOccupationAvailability()
         {
             // TODO write this method
+            m_AvailabilityChecking.SetOccupationAvailability();
+        }
+
+        public void SetAllAvailable()
+        {
+            for (int i = 0; i < m_Width; ++i)
+            {
+                for (int j = 0; j < m_Height; j++)
+                {
+                    m_Nodes[i, j].OccupationAvailability = true;
+                }
+            }
         }
     }
 }

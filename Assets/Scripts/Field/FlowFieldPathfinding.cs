@@ -114,11 +114,6 @@ namespace Field
             Vector2Int rightUpCoordinate = rightCoordinate + Vector2Int.up;
             Vector2Int leftDownCoordinate = leftCoordinate + Vector2Int.down;
             Vector2Int leftUpCoordinate = leftCoordinate + Vector2Int.up;
-            /*Debug.Log(coordinate);
-            Debug.Log(rightCoordinate);
-            Debug.Log(leftCoordinate);
-            Debug.Log(upCoordinate);
-            Debug.Log(downCoordinate);*/
 
             bool hasRightNode = rightCoordinate.x < m_Grid.Width && !m_Grid.GetNode(rightCoordinate).isOccupied;
             bool hasLeftNode = leftCoordinate.x >= 0 && !m_Grid.GetNode(leftCoordinate).isOccupied;

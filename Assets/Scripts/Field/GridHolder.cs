@@ -42,7 +42,7 @@ namespace Field
             float height = m_GridHeight * m_NodeSize;
             transform.localScale = new Vector3(width * 0.1f, 1f, height * 0.1f);
             m_Offset = transform.position - new Vector3(width * 0.5f, 0, height * 0.5f);
-            m_Grid = new Grid(m_GridWidth, m_GridHeight, m_Offset, m_NodeSize, m_Target);
+            m_Grid = new Grid(m_GridWidth, m_GridHeight, m_Offset, m_NodeSize, m_Target, m_StartCoordinate);
             PlaceCamera();
         }
 

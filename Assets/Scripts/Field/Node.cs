@@ -15,8 +15,7 @@ namespace Field
         public Node(Vector3 position)
         {
             Position = position;
-            OccupationAvailability = true;    // Now always true.
-                                                // TODO - calculate after updating field
+            OccupationAvailability = true;
         }
         public void ResetWeight()
         {
