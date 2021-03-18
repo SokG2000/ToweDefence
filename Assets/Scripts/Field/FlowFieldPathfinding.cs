@@ -97,10 +97,6 @@ namespace Field
             bool hasRightUpNode = hasRightNode && hasUpNode && !m_Grid.GetNode(rightUpCoordinate).isOccupied;
             bool hasLeftDownNode = hasLeftNode && hasDownNode && !m_Grid.GetNode(leftDownCoordinate).isOccupied;
             bool hasLeftUpNode = hasLeftNode && hasUpNode && !m_Grid.GetNode(leftUpCoordinate).isOccupied;
-            Debug.Log(rightCoordinate + hasRightNode.ToString());
-            Debug.Log(leftCoordinate + hasLeftNode.ToString());
-            Debug.Log(upCoordinate + hasUpNode.ToString());
-            Debug.Log(downCoordinate + hasDownNode.ToString());
 
             if (hasRightNode)
             {

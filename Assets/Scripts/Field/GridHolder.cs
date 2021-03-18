@@ -33,7 +33,8 @@ namespace Field
             m_Camera.transform.position = new Vector3(0, y, 0);
             m_Camera.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
         }
-        private void Awake()
+
+        public void CreateGrid()
         {
             m_Camera = Camera.main;
             
@@ -46,7 +47,7 @@ namespace Field
             PlaceCamera();
         }
 
-        private void Update()
+        public void RayCastInGrid()
         {
             if (m_Grid == null || m_Camera == null)
             {
@@ -57,15 +58,15 @@ namespace Field
             Ray ray = m_Camera.ScreenPointToRay(mousePosition);
             
             bool is_hitted = (Physics.Raycast(ray, out RaycastHit hit) && hit.collider.transform == transform);
-            if (!is_hitted) return;
+            if (!is_hitted) m_Grid.UnselectNode();
             
             Vector3 hitPosition = hit.point;
             Vector2Int coordinateOnGrid = GetCell(hitPosition);
+            m_Grid.SelectCoordinate(coordinateOnGrid);
 
-            
-            Debug.Log("hit");
+            //Debug.Log("hit");
 
-            if (Input.GetMouseButtonDown(0))
+            /*if (Input.GetMouseButtonDown(0))
             {
                 Node node = m_Grid.GetNode(coordinateOnGrid);
                 if (node.isOccupied)
@@ -78,7 +79,7 @@ namespace Field
                 {
                     m_Grid.TryOccupyNode(coordinateOnGrid);
                 }
-            }
+            }*/
         }
         
         private Vector3 GetCellCenter(Vector2Int coordinateOnGrid)

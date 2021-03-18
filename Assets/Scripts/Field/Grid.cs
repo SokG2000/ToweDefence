@@ -9,6 +9,8 @@ namespace Field
         private int m_Width;
         private int m_Height;
 
+        private Vector2Int m_StartCoordinate;
+        private Vector2Int m_TargetCoordinate;
 
         public int Width => m_Width;
 
@@ -17,10 +19,16 @@ namespace Field
         private FlowFieldPathfinding m_Pathfinding;
         private VertexDiconnectivityComponents m_AvailabilityChecking;
 
+        private Node m_SelectedNode = null;
+
         public Grid(int width, int height, Vector3 offset, float nodeSize, Vector2Int target, Vector2Int start)
         {
             m_Height = height;
             m_Width = width;
+
+            m_StartCoordinate = start;
+            m_TargetCoordinate = target;
+            
             m_Nodes = new Node[m_Width, m_Height];
 
             for (int i = 0; i < m_Width; ++i)
@@ -35,6 +43,36 @@ namespace Field
             m_Pathfinding.UpdateField();
             m_AvailabilityChecking = new VertexDiconnectivityComponents(this, target, start);
             UpdateOccupationAvailability();
+        }
+
+        public Node GetStartNode()
+        {
+            return GetNode(m_StartCoordinate);
+        }
+
+        public Node GetTargetNode()
+        {
+            return GetNode(m_TargetCoordinate);
+        }
+
+        public void SelectCoordinate(Vector2Int coodinate)
+        {
+            m_SelectedNode = GetNode(coodinate);
+        }
+
+        public void UnselectNode()
+        {
+            m_SelectedNode = null;
+        }
+
+        public Node GetSelectedNode()
+        {
+            return m_SelectedNode;
+        }
+
+        public bool HaveSelectedNode()
+        {
+            return m_SelectedNode != null;
         }
 
         public Node GetNode(Vector2Int coordinate)

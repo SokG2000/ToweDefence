@@ -457,10 +457,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a2d5a27b9c84a0dbf4c2fb38c4f6bf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_GridWidth: 6
-  m_GridHeight: 8
+  m_GridWidth: 10
+  m_GridHeight: 10
   m_Target: {x: 0, y: 0}
-  m_StartCoordinate: {x: 5, y: 7}
+  m_StartCoordinate: {x: 9, y: 9}
   m_NodeSize: 1
 --- !u!64 &1610052947
 MeshCollider:
