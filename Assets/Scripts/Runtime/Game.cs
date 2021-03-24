@@ -30,7 +30,6 @@ namespace Runtime
             s_CurrentLevelAsset = levelAsset;
             AsyncOperation operation = SceneManager.LoadSceneAsync(levelAsset.SceneAsset.name);
             operation.completed += StartPlayer;
-            //StartPlayer(); // после загрузки сцены
         }
 
         private static void StartPlayer(AsyncOperation operation)

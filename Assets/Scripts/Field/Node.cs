@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using Enemy;
+using UnityEngine;
 
 namespace Field
 {
@@ -6,6 +8,8 @@ namespace Field
     {
         public Vector3 Position;
         public bool OccupationAvailability;
+
+        public List<EnemyData> EnemyDatas;
         
         public Node NextNode;
         public bool isOccupied;
@@ -16,6 +20,7 @@ namespace Field
         {
             Position = position;
             OccupationAvailability = true;
+            EnemyDatas = new List<EnemyData>();
         }
         public void ResetWeight()
         {

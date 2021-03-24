@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Enemy;
 using Field;
+using Runtime;
 using UnityEngine;
 using Grid = Field.Grid;
 
@@ -11,13 +12,16 @@ namespace Enemy
     {
         private float m_Speed;
         private Transform m_Transform;
+        private EnemyData m_Data;
 
-        public FlyingMovementAgent(float speed, Transform transform, Grid grid)
+        public FlyingMovementAgent(float speed, Transform transform, Grid grid, EnemyData enemyData)
         {
             m_Speed = speed;
             m_Transform = transform;
-            
+            m_Data = enemyData;
             SetTargetNode(grid.GetTargetNode());
+            Node node = Game.Player.Grid.GetNodeAtPoint(transform.position);
+            node.EnemyDatas.Add(enemyData);
         }
         
         private Node m_TargetNode;
@@ -26,6 +30,7 @@ namespace Enemy
 
         public void TickMovement()
         {
+            Node oldNode = Game.Player.Grid.GetNodeAtPoint(m_Transform.position);
             if (m_TargetNode == null)
             {
                 return;
@@ -44,6 +49,12 @@ namespace Enemy
             Vector3 delta = dir.normalized * (m_Speed * Time.deltaTime);
             //Debug.Log(delta);
             m_Transform.Translate(delta);
+            Node newNode = Game.Player.Grid.GetNodeAtPoint(m_Transform.position);
+            if (!Equals(newNode, oldNode))
+            {
+                oldNode.EnemyDatas.Remove(m_Data);
+                newNode.EnemyDatas.Add(m_Data);
+            }
         }
 
         private void SetTargetNode(Node node)

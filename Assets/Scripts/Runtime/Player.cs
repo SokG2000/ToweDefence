@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Enemy;
 using Field;
+using Turret.Weapon;
+using TurretSpawn;
 using UnityEngine;
 using Grid = Field.Grid;
 
@@ -14,12 +16,17 @@ namespace Runtime
 
         public readonly GridHolder GridHolder;
         public readonly Grid Grid;
+        public readonly TurretMarket TurretMarket;
+        //public readonly EnemySearch EnemySearch;
 
         public Player()
         {
             GridHolder = Object.FindObjectOfType<GridHolder>();
             GridHolder.CreateGrid();
             Grid = GridHolder.Grid;
+
+            TurretMarket = new TurretMarket(Game.CurrentLevelAsset.TurretMarketAsset);
+            //EnemySearch = new EnemySearch(m_EnemyDatas);
         }
 
         public void EnemySpawned(EnemyData data)

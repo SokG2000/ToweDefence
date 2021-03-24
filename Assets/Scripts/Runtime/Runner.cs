@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Enemy;
 using EnemySpawn;
 using Field;
+using TurretSpawn;
 using UnityEngine;
 
 namespace Runtime
@@ -38,8 +39,8 @@ namespace Runtime
         {
             m_Controllers = new List<IController>();
             m_Controllers.Add(new GridPointerController(Game.Player.GridHolder));
-            //m_Controllers.Add(new TestController());
             m_Controllers.Add(new EnemySpawnController(Game.CurrentLevelAsset.spawnWavesAsset, Game.Player.Grid));
+            m_Controllers.Add(new TurretSpawnController(Game.Player.Grid, Game.Player.TurretMarket));
             m_Controllers.Add(new MovementController());
             
         }

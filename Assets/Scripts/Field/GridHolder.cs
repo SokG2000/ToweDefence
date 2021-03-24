@@ -61,27 +61,11 @@ namespace Field
             if (!is_hitted) m_Grid.UnselectNode();
             
             Vector3 hitPosition = hit.point;
-            Vector2Int coordinateOnGrid = GetCell(hitPosition);
+            Vector2Int coordinateOnGrid = m_Grid.GetCellCoordinateOnGrid(hitPosition);
             m_Grid.SelectCoordinate(coordinateOnGrid);
-
-            //Debug.Log("hit");
-
-            /*if (Input.GetMouseButtonDown(0))
-            {
-                Node node = m_Grid.GetNode(coordinateOnGrid);
-                if (node.isOccupied)
-                {
-                    node.isOccupied = false;
-                    m_Grid.UpdatePathfinding();
-                    m_Grid.UpdateOccupationAvailability();
-                }
-                else
-                {
-                    m_Grid.TryOccupyNode(coordinateOnGrid);
-                }
-            }*/
         }
         
+        /*
         private Vector3 GetCellCenter(Vector2Int coordinateOnGrid)
         {
             float xShift = (coordinateOnGrid.x + 0.5f) * m_NodeSize;
@@ -97,6 +81,7 @@ namespace Field
             int y = (int) (difference.z / m_NodeSize);
             return new Vector2Int(x, y);
         }
+        */
 
         private void OnDrawGizmos()
         {

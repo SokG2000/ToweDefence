@@ -23,11 +23,11 @@ namespace Enemy
             EnemyAsset enemyAsset = m_Data.EnemyAsset;
             if (enemyAsset.IsFlyingEnemy)
             {
-                m_MovementAgent = new FlyingMovementAgent(enemyAsset.Speed, transform, grid);
+                m_MovementAgent = new FlyingMovementAgent(enemyAsset.Speed, transform, grid, m_Data);
             }
             else
             {
-                m_MovementAgent = new GridMovementAgent(enemyAsset.Speed, transform, grid);
+                m_MovementAgent = new GridMovementAgent(enemyAsset.Speed, transform, grid, m_Data);
             }
         }
     }
