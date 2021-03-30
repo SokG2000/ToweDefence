@@ -37,6 +37,7 @@ namespace Enemy
             }
 
             Vector3 target = m_TargetNode.Position;
+            target.y = m_Transform.position.y;
             float distance = (target - m_Transform.position).magnitude;
             if (distance < TOLERANCE)
             {

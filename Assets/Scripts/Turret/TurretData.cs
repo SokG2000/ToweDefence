@@ -1,4 +1,5 @@
 ﻿using Field;
+using Turret.Weapon;
 
 namespace Turret
 {
@@ -6,8 +7,11 @@ namespace Turret
     {
         private TurretView m_View;
         private Node m_Node;
-        private TurretAsset TurretAsset;
-        
+        private TurretAsset m_Asset;
+        private ITurretWeapon m_Weapon;
+
+        public ITurretWeapon Weapon => m_Weapon;
+
         public TurretView MView => m_View;
         public Node MNode => m_Node;
 
@@ -15,7 +19,7 @@ namespace Turret
 
         public TurretData(TurretAsset asset, Node node)
         {
-            TurretAsset = asset;
+            m_Asset = asset;
             m_Node = node;
         }
 
@@ -23,6 +27,8 @@ namespace Turret
         {
             m_View = view;
             m_View.AttachData(this);
+
+            m_Weapon = m_Asset.WeaponAsset.GetWeapon(view);
         }
     }
 }

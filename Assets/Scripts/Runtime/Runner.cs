@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Enemy;
 using EnemySpawn;
 using Field;
+using Turret.Weapon;
 using TurretSpawn;
 using UnityEngine;
 
@@ -42,7 +43,7 @@ namespace Runtime
             m_Controllers.Add(new EnemySpawnController(Game.CurrentLevelAsset.spawnWavesAsset, Game.Player.Grid));
             m_Controllers.Add(new TurretSpawnController(Game.Player.Grid, Game.Player.TurretMarket));
             m_Controllers.Add(new MovementController());
-            
+            m_Controllers.Add(new TurretShootController());
         }
 
         private void OnStartControllers()

@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc23331e0dfe4343aff272720386bbdc, type: 3}
-  m_Name: FlyingEnemyAsset
+  m_Script: {fileID: 11500000, guid: 0090dde2383c411db7b88ab60e6a9c1f, type: 3}
+  m_Name: LaserWeapon
   m_EditorClassIdentifier: 
-  StartHealth: 10
-  IsFlyingEnemy: 1
-  Speed: 4
-  ViewPrefab: {fileID: 2256639773248152710, guid: 6c03dfd375ccb4446828e039403f4744, type: 3}
+  DamagePerSecond: 5
+  MaxDistance: 50
+  LineRendererPrefab: {fileID: 0}

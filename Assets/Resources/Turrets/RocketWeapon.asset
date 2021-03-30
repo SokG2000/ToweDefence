@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a5947c671f843829635fb22c6474c03, type: 3}
-  m_Name: Turret Market Asset
+  m_Script: {fileID: 11500000, guid: 15d8990165744dd6a6b6a5a159cc1b69, type: 3}
+  m_Name: RocketWeapon
   m_EditorClassIdentifier: 
-  TurretAssets:
-  - {fileID: 11400000, guid: b3642369051126041941c6f38aaa228d, type: 2}
+  RateOfFire: 3
+  MaxDistance: 40
+  ProjectileAsset: {fileID: 11400000, guid: 7852cddf72c9b4f4198d1fdaa9e93b9a, type: 2}

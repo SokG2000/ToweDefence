@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8678571806d64f2ab7b6093a07baa004, type: 3}
-  m_Name: Turret
+  m_Script: {fileID: 11500000, guid: 15d8990165744dd6a6b6a5a159cc1b69, type: 3}
+  m_Name: BulletWeapon
   m_EditorClassIdentifier: 
-  ViewPrefab: {fileID: 4999196434820056358, guid: e8c5bc0578767554eb96966355152e54, type: 3}
+  RateOfFire: 5
+  MaxDistance: 10
+  ProjectileAsset: {fileID: 11400000, guid: 1da7f87dca11ad4498bd7a80b8474f87, type: 2}
