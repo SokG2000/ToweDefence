@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DamagePerSecond: 5
   MaxDistance: 50
-  LineRendererPrefab: {fileID: 0}
+  LineRendererPrefab: {fileID: 4194449428182460602, guid: 28e0ee2c0f50c6642a55b8ab9a15ba32, type: 3}

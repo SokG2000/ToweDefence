@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BulletWeapon
   m_EditorClassIdentifier: 
   RateOfFire: 5
-  MaxDistance: 10
+  MaxDistance: 20
   ProjectileAsset: {fileID: 11400000, guid: 1da7f87dca11ad4498bd7a80b8474f87, type: 2}

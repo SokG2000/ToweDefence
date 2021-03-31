@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Turret
   m_EditorClassIdentifier: 
   ViewPrefab: {fileID: 4999196434820056358, guid: e8c5bc0578767554eb96966355152e54, type: 3}
-  WeaponAsset: {fileID: 11400000, guid: c37881149b3de4641ac7409e47503a43, type: 2}
+  WeaponAsset: {fileID: 11400000, guid: a05d50028bfb9864ab1352c06d6ef72d, type: 2}
