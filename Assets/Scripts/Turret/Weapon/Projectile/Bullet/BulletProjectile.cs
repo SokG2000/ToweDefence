@@ -5,10 +5,16 @@ namespace Turret.Weapon.Projectile.Bullet
 {
     public class BulletProjectile: MonoBehaviour, IProjectile
     {
-        private float m_Speed = 10f;
+        private float m_Speed;
         private bool m_DigHit;
-        private int m_Damage = 5;
+        private float m_Damage;
         private EnemyData m_HitEnemy = null;
+
+        public void SetAsset(BulletProjectileAsset bulletProjectileAsset)
+        {
+            m_Speed = bulletProjectileAsset.Speed;
+            m_Damage = bulletProjectileAsset.Damage;
+        }
         public void TickApproaching()
         {
             transform.Translate(transform.forward * (m_Speed * Time.deltaTime), Space.World);

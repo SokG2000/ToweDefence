@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8678571806d64f2ab7b6093a07baa004, type: 3}
+  m_Name: BowTurret
+  m_EditorClassIdentifier: 
+  ViewPrefab: {fileID: 1014608752249357411, guid: cc982cfad1a149a4b8049b337eacef32, type: 3}
+  WeaponAsset: {fileID: 11400000, guid: 8ff869352802b694fbca1a7018b84b46, type: 2}

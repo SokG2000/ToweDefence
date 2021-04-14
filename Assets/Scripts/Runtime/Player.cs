@@ -31,13 +31,18 @@ namespace Runtime
             Grid = GridHolder.Grid;
 
             TurretMarket = new TurretMarket(Game.CurrentLevelAsset.TurretMarketAsset);
-            //EnemySearch = new EnemySearch(m_EnemyDatas);
         }
 
         public void EnemySpawned(EnemyData data)
         {
             m_EnemyDatas.Add(data);
         }
+
+        public void EnemyDied(EnemyData data)
+        {
+            m_EnemyDatas.Remove(data);
+        }
+        
         public void TurretSpawned(TurretData data)
         {
             m_TurretDatas.Add(data);

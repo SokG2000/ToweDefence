@@ -10,10 +10,16 @@ namespace Turret.Weapon.Projectile.Rocket
     {
         private float m_Speed = 5f;
         private bool m_DigHit;
-        private int m_Damage = 5;
+        private float m_Damage = 5;
         private float m_Radius = 3;
         private EnemyData m_Target;
 
+        public void SetAsset(RocketProjectileAsset asset)
+        {
+            m_Damage = asset.Damage;
+            m_Radius = asset.Radius;
+            m_Speed = asset.Speed;
+        }
         public void SetTarget(EnemyData enemyData)
         {
             m_Target = enemyData;

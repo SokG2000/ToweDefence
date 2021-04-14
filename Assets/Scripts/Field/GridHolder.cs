@@ -29,9 +29,9 @@ namespace Field
         private void PlaceCamera()
         {
             int node_num = Math.Max(m_GridWidth, m_GridHeight);
-            float y = node_num * m_NodeSize;
+            float y = node_num * m_NodeSize * 0.8f;
             m_Camera.transform.position = new Vector3(0, y, 0);
-            m_Camera.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
+            m_Camera.transform.rotation = Quaternion.Euler(90f, 90f, 0f);
         }
 
         public void CreateGrid()
@@ -64,24 +64,6 @@ namespace Field
             Vector2Int coordinateOnGrid = m_Grid.GetCellCoordinateOnGrid(hitPosition);
             m_Grid.SelectCoordinate(coordinateOnGrid);
         }
-        
-        /*
-        private Vector3 GetCellCenter(Vector2Int coordinateOnGrid)
-        {
-            float xShift = (coordinateOnGrid.x + 0.5f) * m_NodeSize;
-            float zShift = (coordinateOnGrid.y + 0.5f) * m_NodeSize;
-            Vector3 shift = new Vector3(xShift, 0f, zShift);
-            return m_Offset + shift;
-        }
-
-        private Vector2Int GetCell(Vector3 coordinateOnPlane)
-        {
-            Vector3 difference = coordinateOnPlane - m_Offset;
-            int x = (int) (difference.x / m_NodeSize);
-            int y = (int) (difference.z / m_NodeSize);
-            return new Vector2Int(x, y);
-        }
-        */
 
         private void OnDrawGizmos()
         {

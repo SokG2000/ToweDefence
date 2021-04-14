@@ -58,6 +58,12 @@ namespace Enemy
             }
         }
 
+        public void Die()
+        {
+            Node node = Game.Player.Grid.GetNodeAtPoint(m_Transform.position);
+            node.EnemyDatas.Remove(m_Data);
+        }
+
         private void SetTargetNode(Node node)
         {
             m_TargetNode = node;

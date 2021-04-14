@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Assets;
+using Runtime;
 using UnityEngine;
 
 namespace Enemy
@@ -28,7 +29,7 @@ namespace Enemy
         public void GetDamage(float damage)
         {
             m_Health -= damage;
-            Debug.Log("Get " + damage.ToString() + " damage.");
+            //Debug.Log("Get " + damage.ToString() + " damage.");
             if (m_Health < 0)
             {
                 Die();
@@ -37,7 +38,10 @@ namespace Enemy
 
         private void Die()
         {
-            Debug.Log("Die");
+            //Debug.Log("Die");
+            m_View.AnimateDie();
+            Game.Player.EnemyDied(this);
+            m_View.MMovementAgent.Die();
         }
     }
 }

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15d8990165744dd6a6b6a5a159cc1b69, type: 3}
   m_Name: RocketWeapon
   m_EditorClassIdentifier: 
-  RateOfFire: 3
+  RateOfFire: 2
   MaxDistance: 40
   ProjectileAsset: {fileID: 11400000, guid: 7852cddf72c9b4f4198d1fdaa9e93b9a, type: 2}

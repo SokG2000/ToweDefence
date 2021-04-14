@@ -13,6 +13,9 @@ namespace Enemy
 
         public IMovementAgent MMovementAgent => m_MovementAgent;
 
+        [SerializeField] private Animator m_Animator;
+        private static readonly int Die = Animator.StringToHash("Die");
+
         public void AttachData(EnemyData data)
         {
             m_Data = data;
@@ -29,6 +32,15 @@ namespace Enemy
             {
                 m_MovementAgent = new GridMovementAgent(enemyAsset.Speed, transform, grid, m_Data);
             }
+        }
+
+        public void AnimateDie()
+        {
+            if (m_Animator == null)
+            {
+                return;
+            }
+            m_Animator.SetTrigger(Die);
         }
     }
 }
